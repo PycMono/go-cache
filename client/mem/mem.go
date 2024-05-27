@@ -31,6 +31,7 @@ func (r *Cache) Del(ctx context.Context, k []string) error {
 	for _, v := range k {
 		r.client.cacheClient.Del([]byte(v))
 	}
+
 	return nil
 }
 

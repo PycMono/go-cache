@@ -23,8 +23,8 @@ func TestMultiCacheGetAndDel(t *testing.T) {
 	var (
 		m = make(map[string]*person)
 	)
-	m["12344pyc-test1"] = &person{
-		Name: "彭亚川12",
+	m["12344345-test1"] = &person{
+		Name: "111",
 		Age:  20,
 	}
 	err := cache.Set(context.TODO(), m)
@@ -32,7 +32,7 @@ func TestMultiCacheGetAndDel(t *testing.T) {
 		panic(err)
 	}
 
-	kvMap, err := cache.Get(context.TODO(), []string{"12344pyc-test1"})
+	kvMap, err := cache.Get(context.TODO(), []string{"12344123-test1"})
 	if err != nil {
 		panic(err)
 	}
@@ -40,12 +40,12 @@ func TestMultiCacheGetAndDel(t *testing.T) {
 	fmt.Println(string(b))
 
 	time.Sleep(time.Second * 10)
-	err = cache.Del(context.TODO(), []string{"12344pyc-test1"})
+	err = cache.Del(context.TODO(), []string{"12344123-test1"})
 	if err != nil {
 		panic(err)
 	}
 
-	kvMap, err = cache.Get(context.TODO(), []string{"12344pyc-test1"})
+	kvMap, err = cache.Get(context.TODO(), []string{"12344123-test1"})
 	if err != nil {
 		panic(err)
 	}
@@ -65,12 +65,12 @@ func TestMultiCacheGetAndSet(t *testing.T) {
 		Expire:    time.Minute * 10,
 	}, getMemAdaptor(), getRedisAdaptor())
 
-	kvMap, err := cache.GetAndSet(context.TODO(), []string{"12344pyc-test1"}, func(k []string) (map[string]*person, error) {
+	kvMap, err := cache.GetAndSet(context.TODO(), []string{"12344123-test1"}, func(k []string) (map[string]*person, error) {
 		var (
 			m = make(map[string]*person)
 		)
-		m["12344pyc-test1"] = &person{
-			Name: "彭亚川12",
+		m["12344123-test1"] = &person{
+			Name: "李四12",
 			Age:  20,
 		}
 		return m, nil
@@ -82,7 +82,7 @@ func TestMultiCacheGetAndSet(t *testing.T) {
 	fmt.Println(string(b))
 	fmt.Println("------------1")
 
-	kvMap, err = cache.Get(context.TODO(), []string{"12344pyc-test1"})
+	kvMap, err = cache.Get(context.TODO(), []string{"12344123-test1"})
 	if err != nil {
 		panic(err)
 	}

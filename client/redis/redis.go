@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"github.com/PycMono/go-cache/client"
+	"github.com/avast/retry-go"
 	"github.com/redis/go-redis/v9"
 	"time"
 )
@@ -35,8 +36,17 @@ func (r *Cache) Set(ctx context.Context, params map[string][]byte, expire time.D
 }
 
 func (r *Cache) Del(ctx context.Context, k []string) error {
-	out := r.client.GetRedisClient().Del(ctx, k...)
-	return out.Err()
+	return retry.Do(
+		func() error {
+			out := r.client.GetRedisClient().Del(ctx, k...)
+			return out.Err()
+		},
+		retry.RetryIf(func(err error) bool {
+			return err != nil
+		}),
+		retry.Delay(3*time.Second),
+		retry.Attempts(3),
+	)
 }
 
 func (r *Cache) Get(ctx context.Context, k []string) (map[string][]byte, error) {

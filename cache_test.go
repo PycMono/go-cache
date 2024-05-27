@@ -14,8 +14,8 @@ import (
 func getRedisAdaptor() client.IAdaptor {
 	conf := redis.Config{}.WithName("test").
 		WithDB(10).
-		WithAddr(":6379").
-		WithPassword("123456").
+		WithAddr("192.168.0.128:6379").
+		WithPassword("dustesssetsud").
 		WithPoolSize(100)
 	redisClient, err := redis.NewRedisClient(&conf)
 	if err != nil {
@@ -46,8 +46,8 @@ func TestSet(t *testing.T) {
 	var (
 		m = make(map[string]*person)
 	)
-	m["12344pyc-test1"] = &person{
-		Name: "彭亚川12",
+	m["12344345-test1"] = &person{
+		Name: "李四12",
 		Age:  20,
 	}
 
@@ -72,8 +72,8 @@ func TestDel(t *testing.T) {
 	var (
 		m = make(map[string]*person)
 	)
-	m["12344pyc-test1"] = &person{
-		Name: "彭亚川12",
+	m["12344345-test1"] = &person{
+		Name: "李四12",
 		Age:  20,
 	}
 
@@ -83,7 +83,7 @@ func TestDel(t *testing.T) {
 	}
 
 	time.Sleep(time.Second * 30)
-	err = mgr.Del(context.TODO(), []string{"12344pyc-test1"})
+	err = mgr.Del(context.TODO(), []string{"12344345-test1"})
 	if err != nil {
 		panic(err)
 	}
@@ -104,8 +104,8 @@ func TestGet(t *testing.T) {
 	var (
 		m = make(map[string]*person)
 	)
-	m["12344pyc-test1"] = &person{
-		Name: "彭亚川12",
+	m["1234423-test1"] = &person{
+		Name: "李四12",
 		Age:  20,
 	}
 
@@ -115,7 +115,7 @@ func TestGet(t *testing.T) {
 	}
 
 	time.Sleep(time.Second * 10)
-	kvMap, err := mgr.Get(context.TODO(), []string{"12344pyc-test1"})
+	kvMap, err := mgr.Get(context.TODO(), []string{"12344345-test1"})
 	if err != nil {
 		panic(err)
 	}
@@ -136,7 +136,7 @@ func TestGetAndSetSingle(t *testing.T) {
 		Expire:    time.Minute * 10,
 	})
 
-	val, ok, err := mgr.GetAndSetSingle(context.TODO(), "12344pyc-test3", func(k string) (*person, bool, error) {
+	val, ok, err := mgr.GetAndSetSingle(context.TODO(), "12344345-test3", func(k string) (*person, bool, error) {
 		return nil, false, nil
 	})
 	if err != nil {
