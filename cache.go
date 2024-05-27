@@ -1,9 +1,9 @@
 package tmpcache
 
 import (
-	"PycMono/github/go/go-cache/client"
 	"context"
 	"fmt"
+	"github.com/PycMono/go-cache/client"
 	"github.com/bytedance/sonic"
 	"golang.org/x/sync/singleflight"
 	"strings"

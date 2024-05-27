@@ -1,9 +1,9 @@
 package mem
 
 import (
-	"PycMono/github/go/go-cache/client"
 	"context"
 	"errors"
+	"github.com/PycMono/go-cache/client"
 	"github.com/coocood/freecache"
 	"time"
 )

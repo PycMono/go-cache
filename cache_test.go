@@ -1,11 +1,11 @@
 package tmpcache
 
 import (
-	"PycMono/github/go/go-cache/client"
-	"PycMono/github/go/go-cache/client/mem"
-	"PycMono/github/go/go-cache/client/redis"
 	"context"
 	"fmt"
+	"github.com/PycMono/go-cache/client"
+	"github.com/PycMono/go-cache/client/mem"
+	"github.com/PycMono/go-cache/client/redis"
 	"github.com/bytedance/sonic"
 	"testing"
 	"time"

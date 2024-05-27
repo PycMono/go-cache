@@ -1,4 +1,4 @@
-module PycMono/github/go/go-cache
+module github.com/PycMono/go-cache
 
 go 1.22.2
 
