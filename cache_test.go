@@ -14,8 +14,8 @@ import (
 func getRedisAdaptor() client.IAdaptor {
 	conf := redis.Config{}.WithName("test").
 		WithDB(10).
-		WithAddr("192.168.0.128:6379").
-		WithPassword("dustesssetsud").
+		WithAddr(":6379").
+		WithPassword("123456").
 		WithPoolSize(100)
 	redisClient, err := redis.NewRedisClient(&conf)
 	if err != nil {
